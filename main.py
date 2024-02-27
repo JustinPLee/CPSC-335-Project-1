@@ -46,10 +46,6 @@ def merge_sort(arr):
             j += 1
             k += 1
 
-def merge_sort_wrapper(arr):
-    merge_sort(arr)
-    return arr
-
 def quick_sort(arr):
     # if the array is empty or has a single element, it's already sorted.
     if len(arr) <= 1:
@@ -93,10 +89,10 @@ def random_list(size):
 def analyze_algorithms(length):
     algorithms = {
         'Bubble Sort': timeit.timeit(lambda: bubble_sort(random_list(length)), number=1),
-        'Merge Sort': timeit.timeit(lambda: merge_sort_wrapper(random_list(length)), number=1),
+        'Merge Sort': timeit.timeit(lambda: merge_sort(random_list(length)), number=1),
         'Quick Sort': timeit.timeit(lambda: quick_sort(random_list(length)), number=1),
     }
-    return algorithms
+    return algorithms.keys(), algorithms.values()
 
 #Generate bar plot
 def generate_bar_plot(algorithms, execution_times):
@@ -126,11 +122,11 @@ while True:
             window['length'].update(value="Invalid input")
             continue
         
-        algorithms = analyze_algorithms(length)
+        algorithm_names, execution_times = analyze_algorithms(length)
         
         #Generate/update bar plot
         if 'fig_agg' in globals():
             window['plot_canvas'].TKCanvas.delete_figure(fig_agg)
-        fig_agg = generate_bar_plot(algorithms.keys(), algorithms.values())
+        fig_agg = generate_bar_plot(algorithm_names, execution_times)
 
 window.close()

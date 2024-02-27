@@ -7,4 +7,4 @@ Instructions:
 2. Clone the project
 3. `cd` into the project directory
 4. Run `poetry install`
-5. Run `poetry run python3 gui.py` to start the program
+5. Run `poetry run python3 main.py` to start the program

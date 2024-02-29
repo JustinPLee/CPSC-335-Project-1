@@ -86,10 +86,11 @@ def random_list(size):
 
 # Return name and runtime of algorithm
 def analyze_algorithms(length):
+    rand_list = random_list(length)
     algorithms = {
-        'Bubble Sort': timeit.timeit(lambda: bubble_sort(random_list(length)), number=1),
-        'Merge Sort': timeit.timeit(lambda: merge_sort(random_list(length)), number=1),
-        'Quick Sort': timeit.timeit(lambda: quick_sort(random_list(length)), number=1),
+        'Bubble Sort': timeit.timeit(lambda: bubble_sort(rand_list), number=1),
+        'Merge Sort': timeit.timeit(lambda: merge_sort(rand_list), number=1),
+        'Quick Sort': timeit.timeit(lambda: quick_sort(rand_list), number=1),
     }
     return algorithms.keys(), algorithms.values()
 

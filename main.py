@@ -10,9 +10,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 def bubble_sort(L): # O(1)
     n = len(L)
     for i in range(n): # n-1 times O(n)
-        for j in range(0, n - 1 - 1): # N-i-1 times O(n)
+        for j in range(0, n - i - 1): # N-i-1 times O(n)
             if L[j] > L[j+1]: # 0(n)
-                L[j], L[j+1], L[j] # O(N^2)
+                L[j], L[j+1] = L[j+1], L[j] # O(N^2)
     return L # O(1)
 
 def merge_sort(arr):

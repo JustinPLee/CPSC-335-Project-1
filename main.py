@@ -78,14 +78,13 @@ layout = [
 
 #Create window
 window = sg.Window('Algorithm Comparison', layout)
-
 def random_list(size):
     res = []
     for _ in range(0, size):
         res.append(random.randint(0, 100000)) # arbitrary range, subject to change
     return res
 
-#Where you put your data
+# Return name and runtime of algorithm
 def analyze_algorithms(length):
     algorithms = {
         'Bubble Sort': timeit.timeit(lambda: bubble_sort(random_list(length)), number=1),
@@ -97,7 +96,9 @@ def analyze_algorithms(length):
 #Generate bar plot
 def generate_bar_plot(algorithms, execution_times):
     plt.figure()
-    plt.bar(algorithms, execution_times)
+    bar = plt.bar(algorithms, execution_times)
+    # truncate decimal points
+    plt.bar_label(bar, labels=[round(time, 5) for time in execution_times])
     plt.xlabel('Algorithms')
     plt.ylabel('Execution Time')
     plt.title('Algorithm Comparison') 
@@ -126,7 +127,7 @@ while True:
         
         #Generate/update bar plot
         if 'fig_agg' in globals():
-            window['plot_canvas'].TKCanvas.delete_figure(fig_agg)
+            fig_agg.get_tk_widget().pack_forget() 
         fig_agg = generate_bar_plot(algorithm_names, execution_times)
 
 window.close()
